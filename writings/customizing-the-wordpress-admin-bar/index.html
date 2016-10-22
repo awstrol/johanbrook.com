@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>Customizing the Wordpress Admin Bar</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="3.1,Add menu,Admin Bar,Customize,Functions.php,Hook,Menu,Wordpress">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/customizing-the-wordpress-admin-bar/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="Customizing the Wordpress Admin Bar">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/customizing-the-wordpress-admin-bar/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="Wordpress 3.1 brought us a lot of things; an admin bar amongst others. That one's been present on hosted Wordpress.com blogs for quite some time, and available as a plugin as well. At first I deactivated the bar at once, but later I realized it's pretty handy to have around. I usually make my own admin menus for quick access to stats, new posts and more, but the official admin bar is more versatile (I'm using the Wordpress function current_user_can("manage_options") in an if-statement to show the admin menu only to me).  Anyway, how about customizing the admin bar? You know: add stuff, style stuff. Plugins and themes may add their own menus to the bar, as with the Wordpress.com Stats plugin I'm using, for instance. A small graph is shown in the bar if you've got the plugin installed, with a link to the admin stats page. Neat – as you see on the screenshot above it also shows the shortlink to the current page/post. The rendering of the bar itself builds upon a simple API you can hook into, but I haven't found any documentation in the Wordpress Codex yet though, so I'm gonna show some simple examples from what I've picked up from the Wordpress core. First we need a hook. The Wordpress developers advise us to use admin_bar_menu . Right on. Add this to functions.php :">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="3.1,Add menu,Admin Bar,Customize,Functions.php,Hook,Menu,Wordpress">
+    <meta property="article:published_time" content="2011-03-03T13:00:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">Customizing the Wordpress Admin Bar</h1>
+
+      <p class="post__meta">
+        <time datetime="2011-03-03T13:00:00.000Z" itemprop="datePublished" title="6 years ago" pubdate>March 3, 2011</time>
+          <span class="meta__stats">3 min / <span itemprop="wordCount">731</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p><strong>Wordpress 3.1 brought us</strong> a lot of things; an admin bar amongst others. That one&#39;s been present on hosted Wordpress.com blogs for quite some time, and available as a plugin as well. At first I deactivated the bar at once, but later I realized it&#39;s pretty handy to have around. I usually make my own admin menus for quick access to stats, new posts and more, but the official admin bar is more versatile (I&#39;m using the Wordpress function <code>current_user_can(&quot;manage_options&quot;)</code> in an <nobr>if-statement</nobr> to show the admin menu only to me). <img src="http://213.185.255.138/core/wp-content/uploads/2011/03/Johan-Brook-adminbar-588x166.png" alt="" title="Johan-Brook-adminbar"> Anyway, how about customizing the admin bar? You know: add stuff, style stuff. Plugins and themes may add their own menus to the bar, as with the Wordpress.com Stats plugin I&#39;m using, for instance. A small graph is shown in the bar if you&#39;ve got the plugin installed, with a link to the admin stats page. Neat – as you see on the screenshot above it also shows the shortlink to the current page/post. The rendering of the bar itself builds upon a simple <abbr>API</abbr> you can hook into, but I haven&#39;t found any documentation in the Wordpress Codex yet though, so I&#39;m gonna show some simple examples from what I&#39;ve picked up from the Wordpress core. First we need a hook. The Wordpress developers advise us to use <code>admin_bar_menu</code> . Right on. Add this to <code>functions.php</code> :</p>
+<pre><code>add_action(&quot;admin_bar_menu&quot;, &quot;customize_menu&quot;);
+
+function customize_menu(){
+    global $wp_admin_bar;
+
+    // Do stuff
+}
+</code></pre><p>The <code>customize_menu()</code> is a handler which will do stuff with the admin bar. We also need to define the global <code>$wp_admin_bar</code> variable in order to call the <abbr>API</abbr> functions.</p>
+<h2 id="the-api">The <abbr>API</abbr></h2>
+<p>The WP_Admin_Bar class includes the great <code>add_menu()</code> function which we use to add menus:</p>
+<pre><code>$wp_admin_bar-&gt;add_menu($args);
+
+// Defaults:
+$args = array(
+   &quot;id&quot; =&gt; false,
+   &quot;title&quot; =&gt; false,
+   &quot;href&quot; =&gt; false,
+   &quot;parent&quot; =&gt; false,
+   &quot;meta&quot; =&gt; false
+);
+</code></pre><p> <code>id</code> (String) The id of your menu. Make sure it&#39;s unique – this will identify your menu, and also be used in the menu item&#39;s <code>id</code> attribute in the <abbr>HTML</abbr> code like this: <code>&lt;li id=&quot;wp-admin-bar-{$id}&quot;&gt; ... &lt;/li&gt;</code> <code>title</code> (String) The title of your menu. Will be shown on the front-end. <code>href</code> (String) The <abbr>URL</abbr> the menu post links to. <code>parent</code> (String) The id of the parent menu, if you&#39;d want that. <code>meta</code> (Array) Some handy extra stuff: &quot;html&quot;, &quot;class&quot;, &quot;onclick&quot;, &quot;title&quot; and &quot;target&quot;. Ex: <code>&quot;meta&quot; =&gt; array(&quot;onclick&quot; =&gt; &#39;alert(&quot;Hi there&quot;);&#39;)</code> . Note: the value of &quot;html&quot; will be added directly after your menu item in the bar. So with these guys you could construct something like this:</p>
+<pre><code>$wp_admin_bar-&gt;add_menu(array(
+   &quot;id&quot; =&gt; &quot;mymenu&quot;,
+   &quot;title&quot; =&gt; &quot;A custom menu&quot;,
+   &quot;href&quot; =&gt; &quot;http://google.com&quot;,
+   &quot;meta&quot; =&gt; array(&quot;target&quot; =&gt; &quot;blank&quot;)
+));
+</code></pre><p>… which will produce this: <img src="http://213.185.255.138/core/wp-content/uploads/2011/03/JohanBrook-CustomMenu.png" alt="" title="JohanBrook-CustomMenu"> Neat. Now you have a custom, top-level menu item. What if you&#39;d like to link to pages in the Wordpress admin from your menu? Check out the <code>admin_url()</code> function. Use it to link directly to any page in <nobr>wp-admin</nobr>, like this: <code>admin_url(&quot;nav-menus.php&quot;)</code> . Incredibly good for plugin authors.</p>
+<h2 id="dropdown-menus">Dropdown menus</h2>
+<p>A menu item is cool and all, but it would be awesome to add more items and group them, like in a dropdown menu. We&#39;ll go ahead and to that with the <code>parent</code> key in the argument array. Add this below the previous code:</p>
+<pre><code>$wp_admin_bar-&gt;add_menu(array(
+    &quot;id&quot; =&gt; &quot;my-child-menu&quot;,
+    &quot;title&quot; =&gt; &quot;Child&quot;,
+    &quot;parent&quot; =&gt; &quot;mymenu&quot;
+));
+</code></pre><p>It behaves just like any other menu, but you&#39;ll have to specify the <code>parent</code> key to the top-level menu&#39;s id. The children are automatically attached to the parent menu and shown on hover, as expected: <img src="http://213.185.255.138/core/wp-content/uploads/2011/03/JohanBrook-ChildMenu.png" alt="" title="JohanBrook-ChildMenu"></p>
+<h2 id="external-data">External data</h2>
+<p>So now it&#39;s completely up to your needs. Just use functions and variables as usual as you du in <code>functions.php</code> . For instance, just declare the global <code>$post</code> variable beside <code>$wp_admin_bar</code> and you&#39;ll have access to the current post&#39;s data:</p>
+<pre><code>add_action(&quot;admin_bar_menu&quot;, &quot;customize_menu&quot;);
+
+function customize_menu(){
+    global $wp_admin_bar, $post;
+
+    $children = get_children(array(&quot;post_parent&quot; =&gt; $post-&gt;ID));
+
+    $wp_admin_bar-&gt;add_menu(array(
+        &quot;id&quot; =&gt; &quot;mymenu&quot;,
+        &quot;title&quot; =&gt; &quot;Post: &quot; . $post-&gt;post_title,
+        &quot;href&quot; =&gt; &quot;http://google.com&quot;,
+        &quot;meta&quot; =&gt; array(&quot;target&quot; =&gt; &#39;blank&#39;)
+    ));
+
+    if($children){
+        foreach($children as $c){
+            $wp_admin_bar-&gt;add_menu(array(
+                &quot;parent&quot; =&gt; &quot;mymenu&quot;,
+                &quot;title&quot; =&gt; $c-&gt;post_title,
+                &quot;href&quot; =&gt; get_permalink($c-&gt;ID)
+            ));
+        }
+    }
+
+}
+</code></pre><p>Simple enough: <em>get access to <code>$post</code> =&gt; Find eventual child pages =&gt; loop through and add to parent item.</em> <img src="http://213.185.255.138/core/wp-content/uploads/2011/03/JohanBrook-ChildPosts.png" alt="" title="JohanBrook-ChildPosts"></p>
+<h2 id="source">Source</h2>
+<p>You&#39;ll find relevant source code in the files <code>wp-includes/class-wp-admin-bar.php</code> and <code>wp-includes/admin-bar.php</code> . Funny: I just realized I had switched to Chrome for the last two screenshots. You&#39;ll just have to put up with that.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

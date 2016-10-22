@@ -1,0 +1,42 @@
+// Colors
+
+$comp-green: #6EBC30;
+$comp-blue: #4BB2F7;
+$comp-red: #C0392B;
+$comp-neon: #54CF88;
+$comp-neon-dark: darken($comp-neon, 20%);
+$comp-orange: #FF8C00;
+$comp-beige: #FDF6E3;
+$comp-cerise: #E01270;
+
+$background-color: #fff;
+
+$text-color: #3c3c3c;
+$grey: #979797;
+$grey-light: #b8b8b8;
+$off-white: #fafafa;
+
+$link-color: $comp-cerise;
+
+// Typography
+
+$base-size: 17;
+$leading: 27;
+
+$lineheight: ($leading / $base-size) * 1rem;
+
+$serif:     'PT Serif', Georgia, serif;
+$sans:      Lato, 'Open Sans', Helvetica, sans-serif;
+$mono:      Hack, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+$headings:  $sans;
+$tumblr-font: $mono;
+
+// Measures
+
+$page-width:        90%;
+$max-width:         40rem;
+
+$desktop:           1700px;
+$laptop:            1280px;
+$tablet:            768px;
+$handheld:          481px;

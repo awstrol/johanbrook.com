@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>Tags and class names – on building flexible markup</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="CSS,HTML,Markup,semantic,classes,class names">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/tags-and-class-names-on-building-flexible-markup/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="Tags and class names – on building flexible markup">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/tags-and-class-names-on-building-flexible-markup/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="It is said your markup should be clean and semantic. What does that mean, exactly? As few tags as possible? The correct tags for the job? Few or no ID and class attributes? At least that's been the main formula for a while now. Littering ID and class attributes over your markup has been frowned upon. But what does the alternative mean?">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="CSS,HTML,Markup,semantic,classes,class names">
+    <meta property="article:published_time" content="2013-03-11T12:14:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">Tags and class names – on building flexible markup</h1>
+
+      <p class="post__meta">
+        <time datetime="2013-03-11T12:14:00.000Z" itemprop="datePublished" title="4 years ago" pubdate>March 11, 2013</time>
+          <span class="meta__stats">3 min / <span itemprop="wordCount">647</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p><strong>It is said your markup</strong> should be <em>clean</em> and <em>semantic</em>. What does that mean, exactly? As few tags as possible? The correct tags for the job? Few or no ID and class attributes? At least that&#39;s been the main formula for a while now. Littering ID and class attributes over your markup has been frowned upon. But what does the alternative mean?</p>
+<p> During my years of coding <abbr>HTML</abbr> I&#39;ve done some bad things. Some really bad things, man. I&#39;ve coded myself into corners, made huge refactors, and so on. One of the main issues I&#39;ve seen is that the <abbr>HTML</abbr> hasn&#39;t been <strong>flexible</strong> enough. I&#39;ve made my markup and styling <em>too tightly coupled</em>. Sadly, one of the factors of that has been my urge to do clean and semantic <abbr>HTML</abbr> with few attributes on my tags. Changing one thing made me to changes in another place as well. Not <abbr>DRY</abbr>.</p>
+<p> An example. Here&#39;s a box for author information in the bottom of a blog post.</p>
+<pre><code>&lt;footer&gt;
+    &lt;h2&gt;Joe Doe&lt;/h2&gt;
+
+    &lt;img src=&quot;avatar-joe.jpg&quot; alt=&quot;Joe&quot; /&gt;
+
+    &lt;p&gt;
+One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.
+    &lt;/p&gt;
+
+&lt;/footer&gt;
+</code></pre><p>Minimal but good example of clean <abbr>HTML</abbr>. But a bit naïve. How would you style the image avatar in <abbr>CSS</abbr>? Piece of cake (assuming the <code>footer</code> element is in an <code>article</code> ):</p>
+<pre><code>article footer img {
+    float: left;
+}
+</code></pre><p>Okay. But say you wrap the <code>img</code> tag in a <code>figure</code> for example? Then your styling perhaps doesn&#39;t behave as expected. If you add more images in the box, weird stuff may happen as well.</p>
+<p> The author description (in the <code>p</code> tag) is interesting too. I&#39;ve made this example minimal, but now the text is wrapped in a single paragraph tag. But what if you need more paragraphs? Other elements in the description? Then some refactorings has to be made.</p>
+<pre><code>&lt;footer class=&quot;post-author&quot;&gt;
+    &lt;h2&gt;Joe Doe&lt;/h2&gt;
+
+    &lt;figure class=&quot;author-avatar&quot;&gt;    
+        &lt;img src=&quot;avatar-joe.jpg&quot; alt=&quot;Joe&quot; /&gt;
+    &lt;/figure&gt;
+
+    &lt;div class=&quot;author-bio&quot;&gt;
+        &lt;p&gt;
+            One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/footer&gt;
+</code></pre><p>Above you see the markup I would write. Notice the additional <code>class</code> attributes and the <code>div</code> element wrapper.</p>
+<h2 id="but-why-oh-why-">But why, oh why?</h2>
+<p>Because it lets me write <strong>more robust, flexible and portable <abbr>HTML</abbr></strong>. In my <abbr>CSS</abbr>, I don&#39;t rely on element tags (which may change during time). As long as I don&#39;t nest the styling too far, my markup will stay the same if I decide to alter the <abbr>HTML</abbr> structure (which as you know always happens). </p>
+<p> In a way, this is what the idea about the roles of <abbr>HTML</abbr> and <abbr>CSS</abbr> is all about. Remember the markup is for presentation, structure? And <abbr>CSS</abbr> is for styling? So why would the presentation and styling be dependent on each other? With <code>class</code> hooks, the <abbr>CSS</abbr> is able to keep a reference to the elements in the markup in a much more reliable way than only doing element hooks. It&#39;s tricky to write super clean <abbr>HTML</abbr> for small sites, and close to impossible for larger sites, with content and <abbr>HTML</abbr> spitted out from a <abbr>CMS</abbr> or whatever. It&#39;s your task as a web developer to make your markup and styling go nice together, living in harmony, and using each others&#39; strengths. I usually keep the mantras <em>modular, <nobr>re-usable</nobr>, generalized</em> close to mind.</p>
+<p> Classes in your markup is fine. Just don&#39;t abuse it, keep a sane balance. It&#39;s like in sex: if it feels good, it&#39;s probably totally okay to do.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

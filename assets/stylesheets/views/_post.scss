@@ -1,0 +1,37 @@
+/* =POST VIEW
+--------------------------------------------- */
+
+.post {
+  padding-bottom: 0;
+
+  [role="article"] {
+    header {
+      text-align: center;
+      margin-bottom: $lineheight*2;
+
+      h1 {
+        margin-bottom: $lineheight / 2;
+        font-weight: 300;
+      }
+    }
+
+    .post__meta {
+      font-size: to_em(16);
+    }
+
+    .meta__stats {
+      position: absolute;
+      top: $lineheight;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  footer {
+
+    &::before {
+      // Hide diagonal effect.
+      display: none;
+    }
+  }
+}

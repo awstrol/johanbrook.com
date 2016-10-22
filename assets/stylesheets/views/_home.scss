@@ -1,0 +1,109 @@
+/* =HOME VIEW
+--------------------------------------------- */
+
+.home {
+  text-align: center;
+  font-family: $sans;
+  @include smooth;
+
+  @include larger-than($handheld) {
+    background: #fff url('/assets/images/abstract.svg') no-repeat center 10vh;
+
+    // Bump down a little to make space for background
+    [role="banner"] {
+      margin-top: 25vh;
+    }
+  }
+
+  @include larger-than(1399px) {
+    background-size: 100%;
+  }
+
+  body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  [role="navigation"] {
+    display: none;
+  }
+
+  [role="main"] {
+    flex: 0 0 auto;
+    width: 90%;
+    max-width: to_rem(330);
+    margin: 0 auto;
+  }
+
+  .home-intro {
+    font-size: to_em(14);
+    color: $grey;
+  }
+
+  .home-nav {
+    @include list-reset;
+    line-height: 2;
+
+    li {
+      position: relative;
+
+      &:hover {
+        .emoji {
+          visibility: visible;
+        }
+      }
+    }
+
+    .emoji {
+      font-size: 1.3em;
+      position: absolute;
+      visibility: hidden;
+      margin-left: 10px;
+      top: 1px;
+    }
+
+    .read {
+      position: absolute;
+      right: 40px;
+      top: 4px;
+      font-size: .8em;
+      font-style: italic;
+      color: $comp-green;
+    }
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: $sans;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: to_em(14);
+
+      &:hover {
+        color: #000;
+        @include underline($size: 2);
+      }
+    }
+  }
+
+  .subnav {
+    margin-top: $lineheight;
+    font-size: .9em;
+  }
+
+  .latest-post {
+    color: darken($grey, 20%);
+    font-size: .8em;
+
+    p {
+      margin-bottom: $lineheight / 2;
+    }
+
+    &__stats {
+      font-family: $sans;
+      font-weight: 300;
+      color: $grey-light;
+    }
+  }
+}

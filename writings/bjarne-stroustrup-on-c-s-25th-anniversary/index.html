@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>Bjarne Stroustrup on C++&#x27;s 25th anniversary</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="johan brook, web development, design, lookback, johan">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/bjarne-stroustrup-on-c-s-25th-anniversary/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="Bjarne Stroustrup on C++&#x27;s 25th anniversary">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/bjarne-stroustrup-on-c-s-25th-anniversary/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="If someone claims to have the perfect programming language, he is either a fool or a salesman or both
+In 1985 Bjarne Stroustrup created the C++ programming language, much because of his and his colleague's frustration with C. Today C++ is everywhere and is in my opinion the mainstream and "godfather language" for beginners to get accustomed with. I remember my excitement and interest when I got a "Learn To Program C++ in 24 Hours" book for Christmas once. Then picture my excitement when I, Johan, wrote – created – my first usable program (a Celsius-Fahrenheit converter). Long live C++.">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="johan brook, web development, design, lookback, johan">
+    <meta property="article:published_time" content="2010-10-16T03:22:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="linked" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name"><a title="http://www.wired.com/thisdayintech/2010/10/1014cplusplus-released/all/" href="http://www.wired.com/thisdayintech/2010/10/1014cplusplus-released/all/">Bjarne Stroustrup on C++&#x27;s 25th anniversary →</a></h1>
+
+      <p class="post__meta">
+        <time datetime="2010-10-16T03:22:00.000Z" itemprop="datePublished" title="6 years ago" pubdate>October 15, 2010</time>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <blockquote>
+<p>If someone claims to have the perfect programming language, he is either a fool or a salesman or both
+In 1985 Bjarne Stroustrup created the C++ programming language, much because of his and his colleague&#39;s frustration with C. Today C++ is everywhere and is in my opinion the mainstream and &quot;godfather language&quot; for beginners to get accustomed with. I remember my excitement and interest when I got a &quot;Learn To Program C++ in 24 Hours&quot; book for Christmas once. Then picture my excitement when I, Johan, wrote – <em>created</em> – my first usable program (a Celsius-Fahrenheit converter). Long live C++.</p>
+</blockquote>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

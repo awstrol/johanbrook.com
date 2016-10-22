@@ -1,0 +1,152 @@
+/* =ELEMENTS
+--------------------------------------------- */
+
+::selection {
+  background-color: $comp-neon;
+  color: #fff;
+}
+
+html {
+  background-color: $background-color;
+  font: normal #{$base-size}px/#{$leading / $base-size} $serif;
+  color: $text-color;
+  padding-bottom: $lineheight*2;
+
+  @include handheld {
+    font-size: 1rem;
+  }
+}
+
+body {
+  // Sticky footer with Flexbox
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // end sticky footer
+}
+
+[role="main"] {
+  flex: 1 0 auto;
+}
+
+nav ul {
+  @include list-reset;
+}
+
+a {
+  color: $link-color;
+}
+
+p {
+  margin: 0 0 $lineheight;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+pre, code {
+  font-family: $mono;
+}
+
+code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: .75em;
+  color: darken(#657B83, 10%);
+
+  &.hljs {
+    padding: 0;
+  }
+}
+
+figure {
+  margin: 0 0 $lineheight;
+}
+
+figcaption {
+  color: $grey;
+}
+
+pre {
+  margin: 0 0 $lineheight;
+  background-color: $off-white;
+  border-radius: 5px;
+  padding: $lineheight;
+  font-size: to_rem(12);
+
+  code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    box-shadow: none;
+  }
+}
+
+blockquote {
+  font-family: $mono;
+  font-size: to_rem(13);
+  border-left: 1px solid $text-color;
+  margin: $lineheight*2 2rem $lineheight*2 0;
+  padding-left: 2rem;
+
+  footer {
+    color: $grey;
+    margin-top: $lineheight;
+  }
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  background-color: #000;
+  margin: $lineheight*3 auto;
+  width: 10rem;
+  max-width: 50%;
+}
+
+
+[role="contentinfo"] {
+  background-color: $comp-neon;
+  margin-top: $lineheight*4;
+  padding: $lineheight*2 5%;
+  font-family: $sans;
+  position: relative;
+  font-weight: normal;
+  margin-top: $lineheight*2;
+  font-size: 1rem;
+  text-align: center;
+  color: darken($comp-neon-dark, 10%);
+
+  &::before {
+    @include tilted-bg(50px);
+    top: 0;
+    background-image: url('/assets/images/tilt-reverse-upside.svg');
+  }
+
+  p {
+    margin: 0 auto $lineheight;
+    max-width: 25rem;
+  }
+
+  a {
+    font-style: italic;
+    color: #fff;
+    @include underline($size: 2, $offset: .1, $bg: $comp-neon, $color: #fff);
+  }
+
+  h2 {
+    font-weight: 300;
+    font-family: $sans;
+    font-size: to_rem(42);
+    color: rgba(#fff, .9);
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}

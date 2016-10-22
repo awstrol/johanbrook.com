@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>The Anatomy of a Perfect Web Site</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="Computer Science,content,educational,information,Java,Minimalism">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/the-anatomy-of-a-perfect-web-site/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="The Anatomy of a Perfect Web Site">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/the-anatomy-of-a-perfect-web-site/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="Many sites on the web are good. They are well-designed, clear, have great information architecture and are easy to navigate. Often, web designers emphasize the "design" part too much, and neglect the other equally important things. However, there are sites which aren't that aesthetically pleasing, but still are the best sites in the world. They may look like a big, sad bag of wrestling underwear on the outside, but their underlying user experience is really, really refined, and thus makes the appearance part fade away while visiting the site. How and why?">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="Computer Science,content,educational,information,Java,Minimalism">
+    <meta property="article:published_time" content="2011-11-08T12:00:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">The Anatomy of a Perfect Web Site</h1>
+
+      <p class="post__meta">
+        <time datetime="2011-11-08T12:00:00.000Z" itemprop="datePublished" title="5 years ago" pubdate>November 8, 2011</time>
+          <span class="meta__stats">4 min / <span itemprop="wordCount">918</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p>Many sites on the web are good. They are well-designed, clear, have great information architecture and are easy to navigate. Often, web designers emphasize the &quot;design&quot; part too much, and neglect the other equally important things. However, there are sites which aren&#39;t that aesthetically pleasing, but still are <strong>the best sites in the world</strong>. They may look like a big, sad bag of wrestling underwear on the outside, but their underlying user experience is really, really refined, and thus makes the appearance part fade away while visiting the site. How and why?</p>
+<h2 id="a-case-study-introduction-to-computer-science-using-java-">A case study: &quot;Introduction to Computer Science using Java&quot;</h2>
+<p>I&#39;m studying Software Engineering at Chalmers University of Technology in Gothenburg. We took this introductory course in object oriented programming with Java earlier this fall, and as the exam approached I browser around the web for better studying resources than the course literature we had. I stumbled upon this site:</p>
+<p> <a href="http://chortle.ccsu.edu/CS151/cs151java.html">&quot;Introduction to Computer Science using Java&quot; →</a>
+ <a href="http://chortle.ccsu.edu/CS151/cs151java.html">http://chortle.ccsu.edu/CS151/cs151java.html</a></p>
+<p> Mirror: <a href="http://programmedlessons.org/java5/index.html">http://programmedlessons.org/java5/index.html</a></p>
+<p> It&#39;s apparently an intro course to Java, given by a Bradley Kjell at Central Connecticut University.</p>
+<p> How do you feel about the index page? It&#39;s rather dull and &quot;undesigned&quot;, right? We&#39;ll dig deeper, and I&#39;ll show you why this site is so awesome.</p>
+<h2 id="information-structure">Information structure</h2>
+<p>If you scroll down you&#39;ll see the different parts of the course listed, and each sub-chapter is named so you&#39;re instantly able to distinguish the type of information given in the chapter. I really like the way all the chapters are listed: no complex menus or navigation. Instead, information is presented in a simple and consise way. Simplicity. That&#39;s what the whole web site screams.</p>
+<p> Choosing a chapter takes you to a page where the chapter overview is presented: what&#39;s to be covered. Also note the questions at the bottom of each page in every chapter. Those are great for learning; not showing you the answer right away, but instead let&#39;s you ponder over the solution and then check the next page for the seeked solution.</p>
+<p> The pages includes body text, tables, figures and code boxes ( <a href="http://chortle.ccsu.edu/java5/Notes/chap29/ch29_3.html">sample</a>). I want to highlight the <a href="http://programmedlessons.org/java5/Notes/chap70/ch70_1.html">recursion section</a> as a great example on how you should construct educational tools.</p>
+<h2 id="features-and-interaction">Features and interaction</h2>
+<ul>
+<li>On <a href="http://programmedlessons.org/java5/Notes/chap72/ch72_3.html">some pages</a> you&#39;re asked to fill in blanks with expressions.</li>
+<li><a href="http://programmedlessons.org/java5/Notes/chap72/ch72_4.html">Other pages</a> includes interactive diagrams (!) where you click on the image to advance through the steps of the code. If you want to wrap your head around recursion, that method is great for visualizing.</li>
+<li>Choosing the &quot;Home&quot; button at the top and bottom of each chapter page not only takes you to the index, but also to the correct position on the page. I.e. if you&#39;re reading about &quot;Exceptions and IO Streams&quot; and decide to go back and check out next chapter, you won&#39;t end up at the top of the index page. Great user experience.</li>
+</ul>
+<p>I especially like the clickable diagrams; I absolutely did not expect a site like this to include that kind of “features”.</p>
+<h2 id="quiz-reviews-and-exercises">Quiz, Reviews, and Exercises</h2>
+<p>The site also offers quiz, reviews and exercises as ways for the visitor to test his or her skills in the subject. There&#39;s something with how these parts of the web site are built. Try out a few Reviews and note how the interaction works. It’s a cool concept (good use of Javascript). Stripped to the barebones.</p>
+<h2 id="style-of-writing">Style of writing</h2>
+<p>Writing for the web is difficult. You shouldn&#39;t write novels for your visitors, nor write texts with small or no substance. It&#39;s an art form actually: to be able to analyse the context, mood, target group(s), aim, and other scenarios.</p>
+<p> I believe our case study outperforms other tutorials or educational sites in writing. There are no long paragraphs of theoretical explanations. I always hate tech articles that have these Wall of Text style paragraphs where just a couple of sentences are truly relevant. That&#39;s not the case here, since all chapters are divided into pages, which each treats a <em>single</em> topic.</p>
+<blockquote>
+<p>Do one thing, and do it well.
+Even though I think this technique leads to many mouse clicks on the &quot;Next&quot; button on each page, it helps you focus on a single topic.</p>
+</blockquote>
+<p> The writing is concise and pedagogical. It explains the concepts in images and real world concepts (that actually works). Some stuff that could be tricky for a beginner to wrap his or her head around (as recursion, for instance) are described with sketches, diagrams, and imagery.</p>
+<p> Noticed how the author’s personality shines through in the text? There are jokes, analogies, and other things which makes it <em>fun</em> to read. It&#39;s not a dull, grey Java tutorial – it’s a guy tutoring you how to use a tool in the best way possible.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>What is my goal with this article? <strong>To give an example that surface is not sufficient to make a web site extraordinary</strong>. Go watch &quot;Shrek&quot; and it&#39;ll tell you it&#39;s what&#39;s underneath that really counts.</p>
+<p> Is our Case Study another sparse, <nobr>un-designed</nobr> educational site, or is it a minimalistic, functional, beautifully architectured learning tool?</p>
+<p> <a href="http://www.markboulton.co.uk/">Mark Boulton</a> and many other industry profiles keep repeating this: <strong>design content out, not canvas in</strong>.</p>
+<p> Note that this site wouldn&#39;t demand that much work writing media queries for mobile devices, making it responsive, either.</p>
+<p> Perhaps web designers and developers should look beyond what&#39;s currently trendy and focus on the message – the content – the cause – the reason. It works for a decade-old computer science course, right?</p>
+<blockquote>
+<p>Design without context is not design. It&#39;s noise.</p>
+</blockquote>
+<p> By <nobr>Someone-I</nobr>&#39;<nobr>ve-forgot</nobr></p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

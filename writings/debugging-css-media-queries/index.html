@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>Debugging CSS Media Queries</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="CSS,CSS3,Media Queries,Responsive Web Design,Sass,SCSS,Viewports">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/debugging-css-media-queries/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="Debugging CSS Media Queries">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/debugging-css-media-queries/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="In Responsive Web Design we’re working with different states, widths, and viewport sizes. Fluidity and adaptive behavior is a hot subject nowadays, and it’s perfectly justified when looking at today’s mobile browser landscape. We achieve this with CSS’s Media Queries. But sometimes it can be messy – I’m gonna share a quick tip for indicating (with pure CSS) which media query that has actually kicked in.">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="CSS,CSS3,Media Queries,Responsive Web Design,Sass,SCSS,Viewports">
+    <meta property="article:published_time" content="2011-05-11T10:00:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">Debugging CSS Media Queries</h1>
+
+      <p class="post__meta">
+        <time datetime="2011-05-11T10:00:00.000Z" itemprop="datePublished" title="5 years ago" pubdate>May 11, 2011</time>
+          <span class="meta__stats">3 min / <span itemprop="wordCount">739</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p><strong>In Responsive Web Design</strong> we’re working with different states, widths, and viewport sizes. Fluidity and adaptive behavior is a hot subject nowadays, and it’s perfectly justified when looking at today’s mobile browser landscape. We achieve this with <abbr>CSS</abbr>’s Media Queries. But sometimes it can be messy – I’m gonna share a quick tip for indicating (with pure <abbr>CSS</abbr>) which media query that has actually kicked in.</p>
+<h2 id="the-problem">The problem</h2>
+<p>When I’m in the early markup stage of a site project I usually lay out a solid, fluid grid foundation to build upon. I’m carving out the different sections of the design in rough code and am also playing around with some media queries – deciding how many to use and how. Some debug stuff is used; boxes that change colour when different media queries fires, and so on. But I sort of wanted a more slick way of visually showing when the media queries fired, and I created one. It’s dead simple – no fancy stuff – but it works. I also have no idea wether it’s already been done or not.</p>
+<p><a href="http://playground.johanbrook.com/css/mediaquerydebug.html">Media Query debugger demo</a></p>
+<h2 id="code">Code</h2>
+<p>Here’s a basic media query targeting mainly tablets:</p>
+<pre><code>@media only screen and (min-width: 768px) and (max-width: 979px){ body{ /* code */ } }
+</code></pre><p>It’ll kick in when the viewport is in between 768px and 979px. Nothing weird, you write the <abbr>CSS</abbr> as usual. However, check out the code below:</p>
+<pre><code>@media only screen and (min-width: 768px) and (max-width: 979px){ body{ /* code */ } body::before{ content: &quot;Tablet media query (768 &lt; 979) fired&quot;; font-weight: bold; display: block; text-align: center; background: rgba(255,255,0, 0.9); /* Semi-transparent yellow */ position: absolute; top: 0; left: 0; right: 0; z-index: 99; } }
+</code></pre><p>Using the <code>::before</code> pseudo selector, I created a phantom element with some descriptive content and styling which lies on top of the web page. That’s it! Here&#39;s a <a href="http://playground.johanbrook.com/css/mediaquerydebug.html">demo</a>.</p>
+<p> With this you can separate media queries in a quick, clear, and effortless way. You can replicate this in Javascript, of course, and maybe also patch one issue I’ve come across: if several media queries overlap each other, only one indicator bar will be shown.</p>
+<p> It may also be clever to use this in a “debug mode”, i.e. apply a <code>debug</code> class to the <code>body</code> element, and go on and write:</p>
+<pre><code>body.debug::before{ /* .. all the stuff .. */ }
+</code></pre><p>Now you’re able to quickly activate and deactivate the indicator bars. Applying a body class would also let use reuse some of the code described above (it would be tedious to write all that stuff over and over again).</p>
+<h2 id="more-for-sass-users">More: For Sass users</h2>
+<p>I love <a href="http://sass-lang.com">Sass</a>. I use it every day, and can’t imagine writing larger chunks of <abbr>CSS</abbr> without it. For this example, Sass would be a perfect fit (for a quick course, check out the project’s website and tutorial).</p>
+<h3 id="reuse-the-debug-message">Reuse the debug message</h3>
+<p>The <abbr>CSS</abbr> for the indicator bars could be made into a <a href="http://sass-lang.com/tutorial.html#mixins">mixin</a>. Mixins are essentially chunks of <abbr>CSS</abbr> code you can include anywhere in the document (great for reusability), and you call them in a manner not too different from function calls.</p>
+<pre><code>@mixin debugmessage($message, $color: rgba(255,255,0, 0.9) ){ &amp;::before{ content: $message; font-weight: bold; display: block; text-align: center; background: #{$color}; position: absolute; right: 0; left: 0; top: 0; z-index: 99; } }
+</code></pre><p>It’s exactly the same code as the first pure <abbr>CSS</abbr> example, but I’ve replaced the <code>content</code> and <code>background</code> values with to arguments. The mixin is later included in the media query:</p>
+<pre><code>@media only screen and (min-width: 768px) and (max-width: 979px){ body{ @include debugmessage(&quot;Tablet media query fired&quot;); } }
+</code></pre><p>Simple right? It’s clean, nice and <strong>reusable</strong>. I’m also able to go ahead and send a different colour along with the mixin (right now, semi-transparent yellow is default if no other argument is given):</p>
+<pre><code>@include debugmessage(&quot;Tablet media query fired&quot;, &quot;red&quot;);
+</code></pre><h3 id="debug-mode">Debug mode</h3>
+<p>Thanks to Sass’ variables, I&#39;m able to declare a global, top-scope variable at the top of my Sass sheets called <code>$DEBUG</code> to keep track of thingss. During development I set it to <code>true</code> . This trick is handy when writing things you might want to turn off when the site launches:</p>
+<pre><code>@if($DEBUG == true){ @include debugmessage(&quot;Mobile media query fired&quot;, &quot;orange&quot;); }
+</code></pre><p>There. Even better, right?</p>
+<h2 id="outro">Outro</h2>
+<p>I randomly created this during a project, and it’s a quick and dirty way of detecting different viewport widths. Give it a spin, and give me a shout ( <a href="http://twitter.com/johanbrook">@johanbrook</a>) if you have any thoughts.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

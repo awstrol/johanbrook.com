@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>What&#x27;s new in Safari 9</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="apple,wwdc,safari,web development">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/what-s-new-in-safari-9/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="What&#x27;s new in Safari 9">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/what-s-new-in-safari-9/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="I'm attending WWDC 2015, and during the web development session, Apple's Safari team showed off what's new in Safari 9. It includes iOS style effects, such as backdrop filters and scroll snapping with CSS, ES6 updates, other CSS niceties.">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="apple,wwdc,safari,web development">
+    <meta property="article:published_time" content="2015-06-09T13:16:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">What&#x27;s new in Safari 9</h1>
+
+      <p class="post__meta">
+        <time datetime="2015-06-09T13:16:00.000Z" itemprop="datePublished" title="a year ago" pubdate>June 9, 2015</time>
+          <span class="meta__stats">4 min / <span itemprop="wordCount">903</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p>I&#39;m attending <abbr>WWDC</abbr> 2015, and during the web development session, Apple&#39;s Safari team showed off what&#39;s new in Safari 9. It includes iOS style effects, such as backdrop filters and scroll snapping with <abbr>CSS</abbr>, ES6 updates, other <abbr>CSS</abbr> niceties.</p>
+<ul>
+<li><a href="#backdrop-filters">Backdrop filters</a></li>
+<li><a href="#scroll-snap-points">Scroll snap points</a></li>
+<li><a href="#css-enhancements"><abbr>CSS</abbr> enhancements</a></li>
+<li><a href="#force-touch-api">Force Touch <abbr>API</abbr></a></li>
+<li><a href="#javascript-updates">Javascript updates</a></li>
+</ul>
+<h2 id="backdrop-filters">Backdrop filters</h2>
+<p>You know the fancy dynamic blur background effects that arrived with iOS7? Where the content &quot;below&quot; a panel would be blurred with a semi transparent mask, but the actual elements in the panel would be as original.</p>
+<p>Currently, the behaviour can be emulated with various techniques. Most common would be to create a copy of the content in the back, add a mask, blur some area, and overlay it on the original content. This is tedious – a maintenance nightmare – even when using it for images only.</p>
+<p>So for Safari 9 (OS X and iOS), Apple has added the <code>backdrop-filter</code> property. It accepts values from the regular <a href="http://dev.w3.org/fxtf/filters/#typedef-filter-function-list"><abbr>CSS</abbr> Filters specification</a>. should be a applied to the element you would normally apply a semi transparent background too. You can combine several filters, as you&#39;d do with the <code>filter</code> property. This is also submitted to be a W3C standard.</p>
+<pre><code class="hljs css">// Styles for a top bar
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  // Will blur and saturate any content below this top bar
+  // as you scroll.
+  backdrop-filter: blur(10px) saturate(100%);
+}</code></pre>
+
+<p>This even works for video and other dynamic content as you scroll! But have in mind that rendering can be expensive, to be sure to test it before shipping.</p>
+<h2 id="scroll-snap-points">Scroll snap points</h2>
+<p>When doing galleries, carousels, and such for touch devices, we&#39;ve traditionally resorted to use Javascript to handle the scrolling when you want control over where the scrolling should snap. Take the Photos.app in iOS as an example: when you flip through images, they&#39;ll snap to the edge of the screen when the scroll momentum stops, instead of overlapping. Apple has simplified this by adding support for scroll snapping directly in <abbr>CSS</abbr> (for iOS and OS X).</p>
+<pre><code class="hljs css">#viewport {
+  // Turn it on.
+  -webkit-scroll-snap-type: mandatory;
+  // Set a snap point every 300px on the X axis. 
+  // Use -webkit-scroll-snap-points-y for Y axis.
+  -webkit-scroll-snap-points-x: repeat(300px);
+}</code></pre>
+
+<p>By using the <code>-webkit-scroll-snap-points-x</code> and <code>-webkit-scroll-snap-points-y</code> properties, we can set a repeating point with the <code>repeat</code> function, or use a regular value, such as:</p>
+<ul>
+<li>percentages and pixels</li>
+<li>viewport units</li>
+<li>calculated values with <code>calc()</code></li>
+</ul>
+<p>This is cool and all, but what if you&#39;ve got dynamic content in this viewport? I.e. irregular sized blocks, such as non-cropped images, where you wouldn&#39;t hardcore a <code>repeat(300px)</code> value.</p>
+<blockquote>
+<p><strong>tldr;</strong> Set both destination and coordinate properties to <code>50% 50%</code> to make irregular elements snap its center to the center point of the viewport. </p>
+</blockquote>
+<p>Safari solves this with the <code>-webkit-scroll-snap-destination</code> and <code>-webkit-scroll-snap-coordinate</code> properties. These properties controls the coordinates of where Safari should position your scrolling content in a viewport.</p>
+<pre><code class="hljs css">#viewport {
+  -webkit-scroll-snap-type: mandatory;
+  // Destination for snapping. 50% 50% denotes the center.
+  // Defaults to 0 (left or top).
+  -webkit-scroll-snap-destination: 50% 50%;
+  // How to align the snap coordinate of an element.
+  // 50% 50% denotes the center.
+  -webkit-scroll-snap-coordinate: 50% 50%;
+}</code></pre>
+
+<p>These styles are available from Javascript with:</p>
+<ul>
+<li><code>element.style.webkitScrollSnapType</code></li>
+<li><code>element.style.webkitScrollSnapPointsY</code></li>
+<li><code>element.style.webkitScrollSnapPointsX</code></li>
+<li><code>element.style.webkitScrollSnapDesitation</code></li>
+<li><code>element.style.webkitScrollSnapCoordinate</code></li>
+</ul>
+<p>Note that this may conflict with programmatic scroll, if you&#39;re using that.</p>
+<h2 id="css-enhancements"><abbr>CSS</abbr> enhancements</h2>
+<p>Safari now supports these unprefixed <abbr>CSS</abbr> properties:</p>
+<ul>
+<li>Transitions</li>
+<li>Animations</li>
+<li>Transforms</li>
+<li>Flexbox</li>
+<li>Columns</li>
+<li><a href="https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW28">… and more</a></li>
+</ul>
+<h3 id="feature-detection">Feature detection</h3>
+<p>In Safari 9, it&#39;s possible to detect support for <abbr>CSS</abbr> properties and write conditional rules in a block:</p>
+<pre><code class="hljs css">@supports(condition) {
+  // Styles for condition
+}</code></pre>
+
+<pre><code class="hljs css">@supports(-webkit-initial-letter: 3) {
+  // Use fancy initial letter styles.
+}</code></pre>
+
+<h3 id="css4-matches-selector"><abbr>CSS</abbr>4 <code>:matches</code> selector</h3>
+<p>The <code>:matches</code> pseudo selector helps you mash a bunch of selectors together like this:</p>
+<pre><code class="hljs css">// Before
+
+.default .foo,
+.default .bar,
+.default .baz {
+  color: red;
+}
+
+// With :matches
+
+.default :matches(.foo, .bar, .baz) {
+  color: red;
+}</code></pre>
+
+<p>This groups all the denoted children of <code>.default</code> together.</p>
+<h2 id="force-touch-api">Force Touch <abbr>API</abbr></h2>
+<p>Apple&#39;s also added a Javascript <abbr>API</abbr> for the Force Touch technology introduced in their latest Macbook.</p>
+<p>Firstly, the <code>webkitForce</code> property is availabel on all Mouse Events. This is a number, which is the force of the current press on the track pad.</p>
+<p>There are also events on a <abbr>DOM</abbr> element for listening to force touch events, which behaves like <code>mouseup</code>/<code>mousedown</code>:</p>
+<ul>
+<li><code>webkitmouseforcechanged</code> — any change in force.</li>
+<li><code>webkitmouseforcewillbegin</code> fires just before the <code>mousedown</code> event. Ideal for preventing default behavior.</li>
+<li><code>webkitmouseforcedown</code> fires after <code>mousedown</code>, if the press is a force press.</li>
+<li><code>webkitmouseforceup</code> fires after the above, if it&#39;s a force press.</li>
+</ul>
+<p>The constants <code>MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN</code> and <code>MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN</code> represents the amount of force required for a regular and force click, respectively.</p>
+<p>See <a href="https://developer.apple.com/library/prerelease/mac/samplecode/WebKitPhotoBrowser/Listings/scripts_new_scripts_js.html#//apple_ref/doc/uid/TP40016150-scripts_new_scripts_js-DontLinkElementID_9">example app</a> for a sample implementation.</p>
+<h2 id="javascript-updates">Javascript updates</h2>
+<p>And lastly, we&#39;ve got some new ES6 features:</p>
+<ul>
+<li>Class syntax</li>
+<li>Template literals</li>
+<li>Symbols</li>
+<li>Computer properties</li>
+<li><a href="https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW27">… and more</a></li>
+</ul>
+<h2 id="pinned-tabs-icon">Pinned tabs icon</h2>
+<p>Last but not least. Remember the Safari pinned tabs introduced at the <abbr>WWDC</abbr> keynote? You can use a custom icon shown when you site is pinned:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"icon"</span> <span class="hljs-attribute">sizes</span>=<span class="hljs-value">"any"</span> <span class="hljs-attribute">mask</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"icon.svg"</span>&gt;</span></code></pre>
+
+<p>The <abbr>SVG</abbr> icon should, <a href="https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW20">according to Apple</a>, have 100% black shapes and transparent background.</p>
+<p>You can however set the color of the icon with:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"theme-color"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"red"</span>&gt;</span></code></pre>
+
+<hr>
+<p>I really like the snap and backdrop <abbr>CSS</abbr> support. I&#39;ve missed the former for a while, but didn&#39;t see the latter coming. Hope they land in Chrome and the others soon.</p>
+<p><a href="https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014305-CH1-SW1">Complete release notes and links to sample code</a>.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>

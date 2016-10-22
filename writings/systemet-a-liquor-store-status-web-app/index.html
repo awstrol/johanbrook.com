@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="post">
+  <head itemtype="http://schema.org/Blog" itemscope>
+    <title>&#x27;Systemet&#x27; – A liquor store status web app</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="I'm a twenty-something designer and developer travelling the world. I work with the best people in a company called Lookback, where I help interfaces come to life.">
+    <meta name="keywords" content="App,Coffeescript,iOS,Mobile,Node.js,Node,Nodejs,MongoDB,Systembolaget,API,Heroku,öppettider,status">
+    <meta name="author" content="Johan Brook">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johan's RSS feed" href="/rss.xml">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic|PT+Serif:400,700,400italic,700italic|Trocchi' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/stylesheets/johan.css">
+
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="canonical" itemprop="url" href="https://www.johanbrook.com/writings/systemet-a-liquor-store-status-web-app/">
+    <link rel="author" href="https://johanbrook.com/about">
+
+    <meta property="og:title" content="&#x27;Systemet&#x27; – A liquor store status web app">
+    <meta property="og:url" content="https://www.johanbrook.com/writings/systemet-a-liquor-store-status-web-app/">
+    <meta property="og:site_name" itemprop="name" content="Johan Brook">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://johanbrook.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="940">
+    <meta property="og:image:height" content="580">
+
+    <meta property="og:description" content="In Sweden the state has monopoly on all sales of alcohol. It sucks sometimes, especially when it comes to competition and opening hours. More than once I've discovered in panic that the liquor store closes 15.00 on a Saturday (!). I've felt a need for a small utility which tracks down the closest store and gives an answer to the question "Is the liquor store open?". So I built one.">
+
+    <meta property="article:author" content="http://facebook.com/johanbrook">
+    <meta property="article:tag" content="App,Coffeescript,iOS,Mobile,Node.js,Node,Nodejs,MongoDB,Systembolaget,API,Heroku,öppettider,status">
+    <meta property="article:published_time" content="2012-05-31T14:31:00.000Z">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-4471592-8', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav role="navigation">
+      <ul class="navigation__primary">
+        <li class=""><a href="/">Home</a></li>
+        <li class="" ><a href="/now">Now</a></li>
+        <li class=""><a href="/writings">Writings</a></li>
+        <li class="" ><a href="/about">About me</a></li>
+      </ul>
+
+      <ul class="navigation__secondary">
+        <li><a href="http://twitter.com/johanbrook">@johanbrook</a></li>
+        <li><a title="Oh, you don't have your personal API yet?" href="/meta.json">API</a></li>
+      </ul>
+    </nav>
+
+    <main role="main">
+  <article role="article" class="" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="name">&#x27;Systemet&#x27; – A liquor store status web app</h1>
+
+      <p class="post__meta">
+        <time datetime="2012-05-31T14:31:00.000Z" itemprop="datePublished" title="4 years ago" pubdate>May 31, 2012</time>
+          <span class="meta__stats">3 min / <span itemprop="wordCount">696</span> words</span>
+      </p>
+    </header>
+
+    <div class="post-text" itemprop="articleBody">
+      <p><strong>In Sweden the state has monopoly</strong> on all sales of alcohol. It sucks sometimes, especially when it comes to competition and opening hours. More than once I&#39;ve discovered in panic that the liquor store closes 15.00 on a Saturday (!). I&#39;ve felt a need for a small utility which tracks down the closest store and gives an answer to the question <em>&quot;Is the liquor store open?&quot;</em>. So I built one.</p>
+<p>Visit the app on systemet.johanbrook.com <a href="http://oppet.systmt.se">oppet.systmt.se</a>. The source is on <a href="https://github.com/johanbrook/systemet">GitHub</a>. I built it with mobiles in mind, but it&#39;s of course usable on all other web devices. If you&#39;re on iOS, feel free to add it to your homescreen for quick access and the full experience (I said that because I&#39;ve made an icon and adjusted the app for native mode …).</p>
+<p> Thanks to <a href="http://niklas.jakobsen.se/">Niklas Jakobsen</a> for the awesome subdomain! (&quot;Öppet&quot; is Swedish for &quot;open&quot;).</p>
+<h2 id="the-why-">The &quot;why&quot;</h2>
+<ol>
+<li>I wanted to build it</li>
+<li>I wanted to learn more about Node.js, MongoDB, CoffeeScript, and web <abbr>API</abbr>s and services</li>
+</ol>
+<h2 id="the-process">The process</h2>
+<p>I started to research ways of getting a list of all stores along with their coordinates and opening hours. Seemed rare at first: 3rd party <abbr>API</abbr>s only offered the product index. But it turned out Systembolaget has official, open <abbr>API</abbr> resources for this <a href="http://www.systembolaget.se/Tjanster/Oppna-APIer/">on this page</a>. They are served in <abbr>XML</abbr> (uhh …) and <abbr>XLS</abbr> (argh!) format, and are quite badly formatted.</p>
+<p> On top of that, the coordinates for the <a href="http://www.systembolaget.se/Assortment.aspx?butikerombud=1">store <abbr>XML</abbr> file</a> are in <a href="http://en.wikipedia.org/wiki/RT90">RT90 format</a> – not the &quot;standard&quot; <abbr>WGS</abbr> coordinate system. Since the app gets regular coordinates from the <nobr>built-in</nobr> GeoLocation sensor, I had to convert them from the <abbr>XML</abbr> file. My father is a surveyor, and along with some research I found neat formulas for converting RT90 to regular coordinates. The <a href="http://en.wikipedia.org/wiki/Gauss%E2%80%93Kr%C3%BCger_coordinate_system"><nobr>Gauss-Kr</nobr>üger method</a> is common, and I also found existing Javascript code for the conversion.</p>
+<p> After a lot of testing I could start doing the real thing. I began with getting to know <a href="http://nodejs.org">Node.js</a>, <a href="http://expressjs.com/">Express.js</a> better along with basic conventions. Everything went quite fast since the language (Javascript) itself wasn&#39;t a problem, but instead the Node way of doing things were new to me. I separated the code in two parts:</p>
+<ol>
+<li><a href="https://github.com/johanbrook/systemet/blob/master/src/routes.coffee">The main app</a> which should serve a start page where client side JS would get the device&#39;s coordinates, send them as parameters via <abbr>XHR</abbr> to my Express app route which should find the closest store and send the data back as <abbr>JSON</abbr>.</li>
+<li><a href="https://github.com/johanbrook/systemet/blob/master/src/script/import.coffee">The import script</a> which should get the <abbr>XML</abbr> from Systembolaget&#39;s website, parse it as <abbr>JSON</abbr>, and insert it into a MongoDB database.</li>
+</ol>
+<p>I of course didn&#39;t want to get the whole <abbr>XML</abbr> file from the <abbr>API</abbr> on every app request, as it would be the only way of doing it. Systembolaget&#39;s &quot;<abbr>API</abbr>&quot; isn&#39;t that sophisticated. Instead I put it all into a Mongo database, which meant I could use all the very useful <a href="http://www.mongodb.org/display/DOCS/Geospatial+Indexing">geospatial indexing features</a> of MongoDB:</p>
+<pre><code>collection.ensureIndex loc: &quot;2d&quot;
+collection.find(loc: $near: [50, 50])
+</code></pre><p>Where <code>[50,50]</code> are the coordinates I would get from the client. Neat.</p>
+<h3 id="hosting">Hosting</h3>
+<p>I began glueing everything together, and it worked quite well locally. Win! The closest liquor store showed up with the correct dates and hours. But I of course wanted to host it online for me and everybody. I instantly thought on <a href="http://heroku.com">Heroku</a> since they offer Node.js hosting nowadays. They also have free MongoDB instances which would serve my purposes well enough. Since I needed to parse <abbr>XML</abbr> from Systembolaget&#39;s service when it&#39;s updated, a cronjob service was required. Heroku offers that (for free!) as well.</p>
+<p> Node.js deployments on Heroku was something I had never done before – I&#39;ve only worked with Ruby stacks. Turned out everything went smooth. After fiddling with the MongoDB connection for a while I got everything to work almost painlessly. Kudos to Heroku.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The user base of my web app is limited to Swedish readers, but it was fun hack nevertheless. I learned a lot about Node.js and asynchronous programming, which wasn&#39;t that easy to wrap my head around at first. Node.js was more low level web server stuff than I had previously done before.</p>
+<p> Check out the source code in the <a href="https://github.com/johanbrook/systemet">GitHub repo</a> and give feedback.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer role="contentinfo">
+  <h2>Hi friend.</h2>
+
+  <p>I'm Johan – a twenty-something developer and designer, currently traveling the world.</p>
+
+  <p>I like building interfaces for humans, authentic experiences, and playing guitar. I like other things too.</p>
+
+  <p>You'll find more posts under <a href="/writings">writings</a>, and you can also read <a href="/about">more about me</a> and <a href="/now">what I'm doing now</a>.</p>
+</footer>
+
+
+    <script type="text/javascript">
+      function init() {
+        addClasses();
+
+        function first(array, n, guard) {
+          if (array == null) return void 0;
+          if (n == null || guard) return array[0];
+
+          return [].slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+        };
+
+        function transform(text) {
+          const DELIMITER = /\.|,/;
+          const sentences = text.split('.');
+          const index = text.search(DELIMITER);
+          const MAX_WORDS = 6;
+
+          function wrap(w, t) {
+            return `<strong>${w}</strong> ${t}`;
+          }
+
+          if (index > -1 && index <= 50) {
+            return wrap(text.split(DELIMITER)[0], text.substring(index));
+          }
+
+          const words = text.split(' ');
+          const first = words.splice(0, MAX_WORDS);
+
+          return wrap(first.join(' '), words.join(' '));
+        };
+
+        const paragraphs = document.querySelectorAll('.posts article .post-text p');
+
+        [].slice.call(paragraphs).forEach(function(p) {
+          if (p.firstChild && (!p.firstChild.tagName || p.firstChild.tagName !== 'STRONG')) {
+            const newContent = transform(p.innerText);
+            p.innerHTML = newContent;
+          }
+        });
+      };
+
+      function addClasses() {
+        const p = document.querySelectorAll('.post article .post-text p');
+        p.length > 0 && p[0].classList.add('ingress');
+
+      };
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </body>
+
+</html>
